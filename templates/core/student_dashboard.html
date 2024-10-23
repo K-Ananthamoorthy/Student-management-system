@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}Student Dashboard - SMS{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6 text-center text-primary">Student Dashboard</h1>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <!-- Personal Information -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold mb-4 text-secondary">Personal Information</h2>
+            <p><strong>Name:</strong> {{ student.user.get_full_name }}</p>
+            <p><strong>Student ID:</strong> {{ student.student_id }}</p>
+            <p><strong>Date of Birth:</strong> {{ student.date_of_birth|default:"Not set" }}</p>
+        </div>
+        
+        <!-- Enrolled Courses -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold mb-4 text-secondary">Enrolled Courses</h2>
+            <ul class="list-disc list-inside">
+                {% for course in courses %}
+                    <li>{{ course.name }} ({{ course.code }})</li>
+                {% empty %}
+                    <li class="text-gray-500">No courses enrolled</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <!-- Recent Announcements -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold mb-4 text-secondary">Recent Announcements</h2>
+            <ul class="space-y-2">
+                {% for announcement in announcements %}
+                    <li>
+                        <p class="font-semibold">{{ announcement.title }}</p>
+                        <p class="text-sm text-gray-600">{{ announcement.course.name }} - {{ announcement.created_at|date:"M d, Y" }}</p>
+                    </li>
+                {% empty %}
+                    <li class="text-gray-500">No recent announcements</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Results Section -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-2xl font-semibold mb-4 text-secondary">Results</h2>
+        <div class="overflow-x-auto">
+            <table class="w-full">
+                <thead>
+                    <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                        <th class="py-3 px-6 text-left">Course</th>
+                        <th class="py-3 px-6 text-left">Grade</th>
+                        <th class="py-3 px-6 text-left">Score</th>
+                        <th class="py-3 px-6 text-left">Date</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-600 text-sm font-light">
+                    {% for result in results %}
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6 text-left whitespace-nowrap">{{ result.course.name }}</td>
+                            <td class="py-3 px-6 text-left">{{ result.grade }}</td>
+                            <td class="py-3 px-6 text-left">{{ result.score }}</td>
+                            <td class="py-3 px-6 text-left">{{ result.date }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4" class="py-3 px-6 text-center text-gray-500">No results available yet.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

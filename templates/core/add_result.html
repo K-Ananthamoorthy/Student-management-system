@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Result for {{ student.user.get_full_name }} - {{ course.name }} - SMS{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6 text-center text-primary">Add Result for {{ student.user.get_full_name }}</h1>
+    <h2 class="text-2xl font-semibold mb-4 text-center text-secondary">{{ course.name }} ({{ course.code }})</h2>
+    <div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
+        <form method="post" class="space-y-4">
+            {% csrf_token %}
+            {% for field in form %}
+                <div>
+                    <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <p class="text-red-500 text-xs italic">{{ field.errors.0 }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <div>
+                <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">Add Result</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Announcement for {{ course.name }} - SMS{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6 text-center text-primary">Create Announcement for {{ course.name }}</h1>
+    <div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
+        <form method="post" class="space-y-4">
+            {% csrf_token %}
+            {% for field in form %}
+                <div>
+                    <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <p class="text-red-500 text-xs italic">{{ field.errors.0 }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <div>
+                <button type="submit" class="w-full bg-accent text-white px-4 py-2 rounded-full hover:bg-accent-dark transition duration-300">Create Announcement</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Course - SMS{% endblock %}
+
+{% block content %}
+<h1 class="text-4xl font-bold mb-8 text-center text-primary">Create Course</h1>
+<div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-md">
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+        <div>
+            <label for="{{ form.name.id_for_label }}" class="block text-sm font-medium text-gray-700">Course Name</label>
+            {{ form.name }}
+        </div>
+        <div>
+            <label for="{{ form.code.id_for_label }}" class="block text-sm font-medium text-gray-700">Course Code</label>
+            {{ form.code }}
+        </div>
+        <div>
+            <label for="{{ form.teacher.id_for_label }}" class="block text-sm font-medium text-gray-700">Teacher</label>
+            {{ form.teacher }}
+        </div>
+        <div>
+            <button type="submit" class="w-full bg-secondary text-white px-4 py-2 rounded-full hover:bg-green-600 transition duration-300">Create Course</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

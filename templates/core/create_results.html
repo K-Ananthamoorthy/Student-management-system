@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Result - SMS{% endblock %}
+
+{% block content %}
+<h1 class="text-4xl font-bold mb-8 text-center text-primary">Create Result</h1>
+<div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-md">
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+        <div>
+            <label for="{{ form.student.id_for_label }}" class="block text-sm font-medium text-gray-700">Student</label>
+            {{ form.student }}
+        </div>
+        <div>
+            <label for="{{ form.grade.id_for_label }}" class="block text-sm font-medium text-gray-700">Grade</label>
+            {{ form.grade }}
+        </div>
+        <div>
+            <label for="{{ form.score.id_for_label }}" class="block text-sm font-medium text-gray-700">Score</label>
+            {{ form.score }}
+        </div>
+        <div>
+            <button type="submit" class="w-full bg-accent text-white px-4 py-2 rounded-full hover:bg-yellow-600 transition duration-300">Create Result</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

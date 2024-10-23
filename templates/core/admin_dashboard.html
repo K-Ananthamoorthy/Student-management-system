@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard - SMS{% endblock %}
+
+{% block content %}
+<h1 class="text-4xl font-bold mb-8 text-center text-primary">Admin Dashboard</h1>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-primary">
+        <h2 class="text-2xl font-semibold mb-4 text-primary">System Overview</h2>
+        <p class="mb-2"><strong class="text-gray-700">Total Students:</strong> {{ student_count }}</p>
+        <p class="mb-2"><strong class="text-gray-700">Total Teachers:</strong> {{ teacher_count }}</p>
+        <p><strong class="text-gray-700">Total Courses:</strong> {{ course_count }}</p>
+    </div>
+    <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-secondary">
+        <h2 class="text-2xl font-semibold mb-4 text-secondary">Recent Users</h2>
+        <ul class="space-y-2">
+            {% for user in recent_users %}
+                <li>
+                    <span class="font-semibold">{{ user.get_full_name }}</span>
+                    <span class="text-sm text-gray-600">({{ user.get_user_type_display }})</span>
+                </li>
+            {% empty %}
+                <li class="text-gray-500">No recent users</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-accent">
+        <h2 class="text-2xl font-semibold mb-4 text-accent">Quick Actions</h2>
+        <ul class="space-y-2">
+            <li><a href="#" class="text-blue-600 hover:underline">Add New User</a></li>
+            <li><a href="{% url 'create_course' %}" class="text-blue-600 hover:underline">Create New Course</a></li>
+            <li><a href="#" class="text-blue-600 hover:underline">View System Logs</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

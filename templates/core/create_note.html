@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Note - SMS{% endblock %}
+
+{% block content %}
+<h1 class="text-4xl font-bold mb-8 text-center text-primary">Create Note</h1>
+<div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-md">
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+        <div>
+            <label for="{{ form.title.id_for_label }}" class="block text-sm font-medium text-gray-700">Title</label>
+            {{ form.title }}
+        </div>
+        <div>
+            <label for="{{ form.content.id_for_label }}" class="block text-sm font-medium text-gray-700">Content</label>
+            {{ form.content }}
+        </div>
+        <div>
+            <button type="submit" class="w-full bg-primary text-white px-4 py-2 rounded-full hover:bg-blue-700 transition duration-300">Create Note</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
